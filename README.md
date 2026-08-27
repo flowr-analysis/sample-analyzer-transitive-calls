@@ -6,6 +6,9 @@ A sample project showing how to use [`flowR`](https://github.com/flowr-analysis/
 2. **collect what each match reaches** — its transitive calls *and* the variables they read, so a `{...}` holding nothing but a variable is tracked too, each with the `pkg::fn` name flowR resolves for it (see [`src/collect.ts`](src/collect.ts)),
 3. **record it as JSON** (see [`src/main.ts`](src/main.ts)).
 
+This was created with the help of [claude](https://claude.ai/) to experiment with its ability to understand and use flowR's API.
+The project is not a polished tool but a demonstration of how to use flowR's API to collect transitive calls of matched expressions in R code.
+
 ## How the collection works
 
 [`src/collect.ts`](src/collect.ts) exports a single `collectMatches(analyzer, search)`, which asks the
@@ -139,15 +142,6 @@ while the run proceeds rather than by reading the NDJSON back:
   "matchesByPackage": { "glue": 33 },
   "calledFunctions":  { "base::library": 21, "base::paste0": 4 },
   "flowrBugs": [], "givenUp": {}, "slowestProjects": [ { "project": "...", "ms": 8123 } ] }
-```
-
-A failed project is filed by *why*, not by which project it was. `flowrBugs` holds one entry per throwing
-site inside flowR, so a bug that a hundred projects trip over is one line rather than a hundred; `givenUp`
-counts what the runner abandoned itself (`timeout`, `worker exited`). The run prints the bugs at the end:
-
-```
-1 distinct flowR failure:
-     1x hasOrigin @ dataflow/internal/process/functions/call/quoted.js:35: Cannot read properties of undefined (reading 'some') (e.g. .../DVN/EU4NKS)
 ```
 
 ## Changing the pattern
