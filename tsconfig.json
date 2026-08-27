@@ -10,7 +10,7 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "outDir": "./dist/",
-    "rootDir": ".",
+    "rootDir": "./src",
     "strict": true,
     "alwaysStrict": true,
     "noUncheckedSideEffectImports": true
